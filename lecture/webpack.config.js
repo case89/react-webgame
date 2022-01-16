@@ -1,49 +1,49 @@
-const path = require("path");
-const RefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const path = require('path');
+const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-  name: "wordrealy-setting",
-  mode: "development",
-  devtool: "eval",
+  name: 'wordrealy-setting',
+  mode: 'development',
+  devtool: 'eval',
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
   },
 
   entry: {
-    app: ["./client"],
+    app: ['./client'],
   }, // 입력
 
   module: {
     rules: [
       {
         test: /\.jsx?/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: {
           presets: [
             [
-              "@babel/preset-env",
+              '@babel/preset-env',
               {
                 targets: {
-                  browsers: ["> 1% in KR"],
+                  browsers: ['> 1% in KR'],
                 },
                 debug: true,
               },
             ],
-            "@babel/preset-react",
+            '@babel/preset-react',
           ],
-          plugins: ["@babel/plugin-proposal-class-properties", "react-hot-loader/babel"],
+          plugins: ['@babel/plugin-proposal-class-properties', 'react-hot-loader/babel'],
         },
       },
     ],
   },
   plugins: [new RefreshWebpackPlugin()],
   output: {
-    path: path.join(__dirname, "dist"),
-    filename: "app.js",
-    publicPath: "/dist/",
+    path: path.join(__dirname, 'dist'),
+    filename: 'app.js',
+    publicPath: '/dist/',
   }, // 출력
   devServer: {
-    devMiddleware: { publicPath: "/dist/" },
+    devMiddleware: { publicPath: '/dist/' },
     static: { directory: path.resolve(__dirname) },
     hot: true,
   },
