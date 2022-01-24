@@ -18,6 +18,8 @@ compnentDidMount() 효과만 낼 수 있는 편법이 있다. 6-6 거의 마지�
 
 변수를 export, import해서 Component 끼리 공유할 수 있다.(대박)
 spread 연산자는 깊은 복사로 알고 있는데 동영상에서 거듭 얕은 복사라고 함.(https://hanamon.kr/javascript-shallow-copy-deep-copy/)
+useEffect와 useRef로 Rendering을 추측할 수 있다.(최적화 시 필요)
+반복문이 있는데에 memo를 쓰면 됨.
 
 # ETC
 
