@@ -24,9 +24,11 @@ class NumberBaseball extends Component {
     const { value, tries, answer } = this.state;
     e.preventDefault();
     if (value === answer.join('')) {
-      this.setState({
-        result: '홈런!',
-        tries: [...tries, { try: value, result: '홈런!' }],
+      this.setState((prevState) => {
+        return {
+          result: '홈런!',
+          tries: [...prevState.tries, { try: value, result: '홈런!' }],
+        };
       });
       alert('게임을 다시 시작합니다!');
       this.setState({
@@ -41,6 +43,7 @@ class NumberBaseball extends Component {
       let strike = 0;
       let ball = 0;
       if (tries.length >= 9) {
+        // 10번 이상 틀렸을 때
         this.setState({
           result: `10번 넘게 틀려서 실패! 답은 ${answer.join(',')}였습니다!`,
         });
@@ -50,6 +53,7 @@ class NumberBaseball extends Component {
           answer: getNumbers(),
           tries: [],
         });
+        this.inputRef.current.focus();
       } else {
         for (let i = 0; i < 4; i += 1) {
           if (answerArray[i] === answer[i]) {
@@ -58,14 +62,15 @@ class NumberBaseball extends Component {
             ball += 1;
           }
         }
-        this.setState({
-          tries: [...tries, { try: value, result: `${strike} 스트라이크, ${ball} 볼입니다` }],
-          value: '',
+        this.setState((prevState) => {
+          return {
+            tries: [...prevState.tries, { try: value, result: `${strike} 스트라이크, ${ball} 볼입니다` }],
+            value: '',
+          };
         });
+        this.inputRef.current.focus();
       }
-      this.inputRef.current.focus();
     }
-    console.log(value);
   };
 
   onChangeInput = (e) => {
@@ -75,7 +80,7 @@ class NumberBaseball extends Component {
     });
   };
 
-  inputRef = createRef();
+  inputRef = createRef(); // this.inputRef
 
   render() {
     const { result, value, tries } = this.state;
@@ -88,7 +93,7 @@ class NumberBaseball extends Component {
         <div>시도: {tries.length}</div>
         <ul>
           {tries.map((v, i) => {
-            return <Try key={`${(i = 1)}차 시도 : `} tryInfo={v} index={i} />;
+            return <Try key={`${i + 1}차 시도 :`} tryInfo={v} />;
           })}
         </ul>
       </>
@@ -96,4 +101,4 @@ class NumberBaseball extends Component {
   }
 }
 
-export default NumberBaseball;
+export default NumberBaseball; // import NumberBaseball;

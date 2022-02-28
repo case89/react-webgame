@@ -1,4 +1,4 @@
-import React, { Purecomponent, memo, useState } from 'react';
+import React, { memo } from 'react';
 
 const Try = memo(({ tryInfo }) => {
   return (
